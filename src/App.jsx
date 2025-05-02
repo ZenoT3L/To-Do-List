@@ -1,40 +1,38 @@
 import { useState } from "react";
-import List from "./List";
+import Container from "./components/Container";
 
 function App() {
-  const [list, setList] = useState(["An Item"]);
-  const [Item, setItem] = useState("");
+  const [item, setItem] = useState("");
+  const [list, setList] = useState(["A Item"]);
 
-  function addNewItem(event) {
+  function handleItem(event) {
     setItem(event.target.value);
   }
 
   function addItem() {
-    if (Item.trim() === "") return; // Prevent empty items
-    setList([...list, Item]);
+    if (item.trim() === "") return;
+
+    setList([...list, item]);
     setItem("");
+  }
+
+  function deleteItem(id) {
+    setList((olditem) => {
+      return olditem.filter((arrElem, index) => {
+        return index !== id;
+      });
+    });
   }
 
   return (
     <>
-      <div className="container">
-        <div className="heading">
-          <h1>To-Do List</h1>
-        </div>
-        <div className="form">
-          <input type="text" name="Item" value={Item} onChange={addNewItem} />
-          <button onClick={addItem}>
-            <span>Add</span>
-          </button>
-        </div>
-        <div>
-          <ul>
-            {list.map((item, id) => (
-              <List key={id} val={item} />
-            ))}
-          </ul>
-        </div>
-      </div>
+      <Container
+        item={item}
+        setItem={handleItem}
+        addItem={addItem}
+        list={list}
+        deleteItem={deleteItem}
+      />
     </>
   );
 }
