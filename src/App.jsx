@@ -3,7 +3,7 @@ import Container from "./components/Container";
 
 function App() {
   const [item, setItem] = useState("");
-  const [list, setList] = useState(["A Item"]);
+  const [list, setList] = useState(["An Item"]);
 
   function handleItem(event) {
     setItem(event.target.value);
