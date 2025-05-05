@@ -1,28 +1,9 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Container from "./components/Container";
+import { useTodoList } from "./components/functions";
 
 function App() {
-  const [item, setItem] = useState("");
-  const [list, setList] = useState(["An Item"]);
-
-  function handleItem(event) {
-    setItem(event.target.value);
-  }
-
-  function addItem() {
-    if (item.trim() === "") return;
-
-    setList([...list, item]);
-    setItem("");
-  }
-
-  function deleteItem(id) {
-    setList((olditem) => {
-      return olditem.filter((arrElem, index) => {
-        return index !== id;
-      });
-    });
-  }
+  const { item, list, handleItem, addItem, deleteItem } = useTodoList();
 
   return (
     <>
